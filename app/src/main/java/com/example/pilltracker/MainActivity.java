@@ -6,23 +6,31 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.Log;
 import android.view.View;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.WindowCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pilltracker.databinding.ActivityMainBinding;
 
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
+    private RecyclerView medicationsRV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +49,19 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        medicationsRV = findViewById(R.id.medicationsRV);
+
+        // sample medications for testing
+        ArrayList<Medication>  medsList = new ArrayList<>(Arrays.asList(
+                new Medication("med 1", "0.5cc"),
+                new Medication("med 2", "35cc"),
+                new Medication("vitamin c", "1")
+        ));
+        MedicationRVA adapter = new MedicationRVA(this);
+        adapter.setMedications(medsList);
+        medicationsRV.setAdapter(adapter);
+        medicationsRV.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @Override
