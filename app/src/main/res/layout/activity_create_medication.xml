@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreateMedicationActivity">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="50dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="50dp" />
+
+    <EditText
+        android:id="@+id/editName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Medication Name"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editDose"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="Dosage"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintTop_toBottomOf="@+id/editName" />
+
+    <EditText
+        android:id="@+id/editSupply"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="Current Doses"
+        android:inputType="number"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintTop_toBottomOf="@+id/editDose" />
+
+    <EditText
+        android:id="@+id/editReminder"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="Daily Reminder"
+        android:inputType="time"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintTop_toBottomOf="@+id/editSupply" />
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Save"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintTop_toBottomOf="@+id/editReminder" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
