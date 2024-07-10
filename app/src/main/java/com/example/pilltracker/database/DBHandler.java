@@ -29,15 +29,29 @@ public class DBHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String create_meds_table = String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, %s TEXT NOT NULL)",
-                Config.TABLE_MEDS, Config.MEDS_ID, Config.MEDS_NAME);
+        String create_meds_table = String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTO_INCREMENT, %s VARCHAR(50) NOT NULL, %s VARCHAR(50), %s VARCHAR(50))",
+                Config.MEDS_TABLE,
+                Config.MED_ID,
+                Config.MED_NAME,
+                Config.MED_DOSE,
+                Config.MED_FREQ);
         sqLiteDatabase.execSQL(create_meds_table);
+
+        String create_measurements_table = String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTO_INCREMENT, %s VARCHAR(50) NOT NULL, %s VARCHAR(50))",
+                Config.MEASURES_TABLE,
+                Config.MEASURE_ID,
+                Config.MEASURE_NAME,
+                Config.MEASURE_FREQ);
+        sqLiteDatabase.execSQL(create_measurements_table);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         // drop old tables
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Config.TABLE_MEDS);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Config.MEDS_TABLE);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Config.MEASURES_TABLE);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Config.MEDS_LOG_TABLE);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Config.MEASURE_LOG_TABLE);
 
         // create new tables
         onCreate(sqLiteDatabase);
