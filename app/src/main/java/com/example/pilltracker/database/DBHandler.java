@@ -12,7 +12,7 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String DB_NAME = "pill-tracker-db";
     private static final int DB_VERSION = 1;
 
-    public DBHandler getInstance(Context context) {
+    public static DBHandler getInstance(Context context) {
         if(database == null) {
             synchronized (DBHandler.class) {
                 if(database == null) {
