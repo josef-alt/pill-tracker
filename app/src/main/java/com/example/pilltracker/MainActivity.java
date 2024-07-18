@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
     private RecyclerView medicationsRV;
+    private MedicationRVA adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,20 +35,29 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(binding.toolbar);
 
         // launch new medication activity
-        binding.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, CreateMedicationActivity.class);
-                startActivity(intent);
-            }
+        binding.fab.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, CreateMedicationActivity.class);
+            startActivityForResult(intent, 1);
         });
 
         medicationsRV = findViewById(R.id.medicationsRV);
+        adapter = new MedicationRVA(this);
+        loadRecyclerView();
+    }
 
-        // sample medications for testing
+    // reload recycler view when meds have been successfully inserted
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode > -1) {
+            loadRecyclerView();
+        }
+    }
+
+    // retrieve meds and fill rv
+    private void loadRecyclerView() {
         DBQueryHandler queryHandler = new DBQueryHandler(this);
         ArrayList<Medication> medsList = new ArrayList<>(queryHandler.getAllMedications());
-        MedicationRVA adapter = new MedicationRVA(this);
         adapter.setMedications(medsList);
         medicationsRV.setAdapter(adapter);
         medicationsRV.setLayoutManager(new LinearLayoutManager(this));

@@ -39,6 +39,7 @@ public class CreateMedicationActivity extends AppCompatActivity {
             long code = db.insertMedication(newMed);
             Log.i("SQL", "New Med Id: " + code);
             if(code != -1) {
+                setResult((int)code);
                 finish();
             }
         });
