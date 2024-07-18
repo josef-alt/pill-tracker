@@ -20,6 +20,10 @@ public class DBQueryHandler {
 
     private Context context;
 
+    public DBQueryHandler(Context context) {
+        this.context = context;
+    }
+
     public long insertMedication(Medication medication) {
         long id = -1;
 
