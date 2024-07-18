@@ -64,7 +64,7 @@ public class DBQueryHandler {
                 if(cursor.moveToFirst()) {
                     List<Medication> medications = new ArrayList<>();
                     do {
-                        int id = cursor.getInt(cursor.getColumnIndex(Config.MED_ID));
+                        //int id = cursor.getInt(cursor.getColumnIndex(Config.MED_ID));
                         String med = cursor.getString(cursor.getColumnIndex(Config.MED_NAME));
                         String dose = cursor.getString(cursor.getColumnIndex(Config.MED_DOSE));
                         String freq = cursor.getString(cursor.getColumnIndex(Config.MED_FREQ));
