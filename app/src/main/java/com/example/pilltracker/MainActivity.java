@@ -11,6 +11,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.pilltracker.database.DBQueryHandler;
 import com.example.pilltracker.databinding.ActivityMainBinding;
 
 import java.util.ArrayList;
@@ -43,11 +44,8 @@ public class MainActivity extends AppCompatActivity {
         medicationsRV = findViewById(R.id.medicationsRV);
 
         // sample medications for testing
-        ArrayList<Medication>  medsList = new ArrayList<>(Arrays.asList(
-                new Medication("med 1", "0.5cc"),
-                new Medication("med 2", "35cc"),
-                new Medication("vitamin c", "1")
-        ));
+        DBQueryHandler queryHandler = new DBQueryHandler(this);
+        ArrayList<Medication> medsList = new ArrayList<>(queryHandler.getAllMedications());
         MedicationRVA adapter = new MedicationRVA(this);
         adapter.setMedications(medsList);
         medicationsRV.setAdapter(adapter);
