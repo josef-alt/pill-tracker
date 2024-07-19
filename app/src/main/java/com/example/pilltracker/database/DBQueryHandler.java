@@ -37,6 +37,7 @@ public class DBQueryHandler {
 
         try {
             id = sqLiteDatabase.insertOrThrow(Config.MEDS_TABLE, null, cv);
+            medication.setId(id);
         } catch(SQLiteException e) {
             Log.e("SQLite", e.getMessage());
             Toast.makeText(context, "Insert failed.", Toast.LENGTH_SHORT).show();
