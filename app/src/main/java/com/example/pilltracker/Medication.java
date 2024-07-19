@@ -1,11 +1,14 @@
 package com.example.pilltracker;
 
 import java.time.LocalDateTime;
+import java.util.OptionalLong;
 
 /**
  *  Medication model
  */
 public class Medication {
+    private OptionalLong id;
+
     private String name;
 
     private String dosage;
@@ -21,6 +24,26 @@ public class Medication {
         this.name = name;
         this.dosage = dosage;
         this.frequency = frequency;
+        this.id = OptionalLong.empty();
+    }
+
+    public Medication(long id, String name, String dosage, String frequency) {
+        this.name = name;
+        this.dosage = dosage;
+        this.frequency = frequency;
+        this.id = OptionalLong.of(id);
+    }
+
+    public boolean hasId() {
+        return id.isPresent();
+    }
+
+    public void setId(long id) {
+        this.id = OptionalLong.of(id);
+    }
+
+    public long getId() {
+        return id.getAsLong();
     }
 
     public String getName() {

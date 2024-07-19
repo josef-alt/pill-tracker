@@ -53,7 +53,8 @@ public class DBQueryHandler {
 
         Cursor cursor = null;
         try {
-            String select = String.format("SELECT %s, %s, %s FROM %s",
+            String select = String.format("SELECT %s, %s, %s, %s FROM %s",
+                    Config.MED_ID,
                     Config.MED_NAME,
                     Config.MED_DOSE,
                     Config.MED_FREQ,
@@ -64,12 +65,12 @@ public class DBQueryHandler {
                 if(cursor.moveToFirst()) {
                     List<Medication> medications = new ArrayList<>();
                     do {
-                        //int id = cursor.getInt(cursor.getColumnIndex(Config.MED_ID));
+                        long id = cursor.getLong(cursor.getColumnIndex(Config.MED_ID));
                         String med = cursor.getString(cursor.getColumnIndex(Config.MED_NAME));
                         String dose = cursor.getString(cursor.getColumnIndex(Config.MED_DOSE));
                         String freq = cursor.getString(cursor.getColumnIndex(Config.MED_FREQ));
 
-                        medications.add(new Medication(med, dose, freq));
+                        medications.add(new Medication(id, med, dose, freq));
                     } while(cursor.moveToNext());
 
                     return medications;
