@@ -17,6 +17,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    private final int CREATE_MEDICATION_REQUEST = 100;
+
     private ActivityMainBinding binding;
     private RecyclerView medicationsRV;
     private MedicationRVA adapter;
@@ -45,8 +47,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode > -1) {
-            loadRecyclerView();
+        switch(requestCode) {
+            case CREATE_MEDICATION_REQUEST:
+                if (resultCode == CreateMedicationActivity.SUCCESS) {
+                    loadRecyclerView();
+                }
+                break;
         }
     }
 

@@ -10,6 +10,9 @@ import android.widget.EditText;
 import com.example.pilltracker.database.DBQueryHandler;
 
 public class CreateMedicationActivity extends AppCompatActivity {
+
+    public static final int SUCCESS = 201;
+
     private EditText medName, dosage, supply, reminder;
     private Button saveButton;
 
@@ -36,10 +39,10 @@ public class CreateMedicationActivity extends AppCompatActivity {
             Medication newMed = new Medication(medName.getText().toString(), dosage.getText().toString(), reminder.getText().toString());
 
             // make sure insertion was successful before closing activity
-            long code = db.insertMedication(newMed);
-            Log.i("SQL", "New Med Id: " + code);
-            if(code != -1) {
-                setResult((int)code);
+            long newId = db.insertMedication(newMed);
+            Log.i("SQL", "New Med Id: " + newId);
+            if(newId != -1) {
+                setResult(SUCCESS);
                 finish();
             }
         });
