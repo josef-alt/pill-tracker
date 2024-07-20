@@ -1,11 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp">
 
-    <TextView
-        android:id="@+id/medicationName"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/typeIcon"
+            android:layout_width="100px"
+            android:layout_height="100px"
+            android:src="@drawable/ic_pill"/>
+
+        <TextView
+            android:id="@+id/medicationName"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/typeIcon"
+            android:layout_marginLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="medication name here" />
+    </RelativeLayout>
 
 </androidx.cardview.widget.CardView>
