@@ -8,3 +8,5 @@ Just a simple Android app for tracking medications and maybe down the line other
 * group meds under one notification
 * track medication depletion
 * add refills
+# credits
+<a href="https://www.flaticon.com/free-icons/pill" title="pill icons">Pill icons created by Those Icons - Flaticon</a>
