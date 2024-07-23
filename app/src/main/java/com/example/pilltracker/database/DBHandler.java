@@ -29,12 +29,13 @@ public class DBHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String create_meds_table = String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY, %s VARCHAR(50) NOT NULL, %s VARCHAR(50), %s VARCHAR(50))",
+        String create_meds_table = String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY, %s VARCHAR(50) NOT NULL, %s VARCHAR(50), %s VARCHAR(50), %s VARCHAR(50))",
                 Config.MEDS_TABLE,
                 Config.MED_ID,
                 Config.MED_NAME,
                 Config.MED_DOSE,
-                Config.MED_FREQ);
+                Config.MED_FREQ,
+                Config.MED_TIME);
         sqLiteDatabase.execSQL(create_meds_table);
 
         String create_measurements_table = String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY, %s VARCHAR(50) NOT NULL, %s VARCHAR(50))",

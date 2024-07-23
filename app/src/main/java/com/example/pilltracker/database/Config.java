@@ -9,6 +9,7 @@ public class Config {
     public static final String MED_NAME = "name";
     public static final String MED_DOSE = "dose";
     public static final String MED_FREQ = "freq";
+    public static final String MED_TIME = "time";
 
     public static final String MEDS_LOG_TABLE = "medication_log";
     public static final String MED_LOG_LOG_ID = "_id";
