@@ -34,6 +34,7 @@ public class DBQueryHandler {
         cv.put(Config.MED_NAME, medication.getName());
         cv.put(Config.MED_DOSE, medication.getDose());
         cv.put(Config.MED_FREQ, medication.getFrequency());
+        cv.put(Config.MED_TIME, medication.getReminderAsString());
 
         try {
             id = sqLiteDatabase.insertOrThrow(Config.MEDS_TABLE, null, cv);
@@ -54,11 +55,12 @@ public class DBQueryHandler {
 
         Cursor cursor = null;
         try {
-            String select = String.format("SELECT %s, %s, %s, %s FROM %s",
+            String select = String.format("SELECT %s, %s, %s, %s, %s FROM %s",
                     Config.MED_ID,
                     Config.MED_NAME,
                     Config.MED_DOSE,
                     Config.MED_FREQ,
+                    Config.MED_TIME,
                     Config.MEDS_TABLE);
             cursor = sqLiteDatabase.rawQuery(select, null);
 
@@ -70,8 +72,13 @@ public class DBQueryHandler {
                         String med = cursor.getString(cursor.getColumnIndex(Config.MED_NAME));
                         String dose = cursor.getString(cursor.getColumnIndex(Config.MED_DOSE));
                         String freq = cursor.getString(cursor.getColumnIndex(Config.MED_FREQ));
+                        String time = cursor.getString(cursor.getColumnIndex(Config.MED_TIME));
 
-                        medications.add(new Medication(id, med, dose, freq));
+                        Medication newMed = new Medication(id, med, dose, freq);
+                        if(!time.isEmpty()) {
+                            newMed.setReminderFromISO(time);
+                        }
+                        medications.add(newMed);
                     } while(cursor.moveToNext());
 
                     return medications;
