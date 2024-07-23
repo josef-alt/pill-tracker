@@ -1,6 +1,7 @@
 package com.example.pilltracker;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.OptionalLong;
 
 /**
@@ -60,6 +61,18 @@ public class Medication {
 
     public void setReminder(LocalDateTime reminder) {
         this.reminder = reminder;
+    }
+
+    public void setReminderFromISO(String iso) {
+        reminder = LocalDateTime.parse(iso, DateTimeFormatter.ISO_TIME);
+    }
+
+    public LocalDateTime getReminder() {
+        return reminder;
+    }
+
+    public String getReminderAsString() {
+        return reminder.format(DateTimeFormatter.ISO_TIME);
     }
 
     @Override
