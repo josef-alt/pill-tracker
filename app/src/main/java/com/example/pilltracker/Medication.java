@@ -2,6 +2,7 @@ package com.example.pilltracker;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 import java.util.OptionalLong;
 
 /**
@@ -19,7 +20,7 @@ public class Medication {
     // TODO multiple times a day
     // TODO non-scheduled
     // TODO every n-days / day of week
-    private LocalDateTime reminder;
+    private Optional<LocalDateTime> reminder;
 
     public Medication(String name, String dosage, String frequency) {
         this.name = name;
@@ -60,19 +61,23 @@ public class Medication {
     }
 
     public void setReminder(LocalDateTime reminder) {
-        this.reminder = reminder;
+        this.reminder = Optional.of(reminder);
     }
 
     public void setReminderFromISO(String iso) {
-        reminder = LocalDateTime.parse(iso, DateTimeFormatter.ISO_TIME);
+        reminder = Optional.of(LocalDateTime.parse(iso, DateTimeFormatter.ISO_TIME));
+    }
+
+    public boolean hasReminder() {
+        return reminder.isPresent();
     }
 
     public LocalDateTime getReminder() {
-        return reminder;
+        return reminder.get();
     }
 
     public String getReminderAsString() {
-        return reminder.format(DateTimeFormatter.ISO_TIME);
+        return reminder.isPresent() ? reminder.get().format(DateTimeFormatter.ISO_TIME) : "";
     }
 
     @Override
