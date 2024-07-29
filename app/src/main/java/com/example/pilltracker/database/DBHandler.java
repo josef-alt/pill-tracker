@@ -3,6 +3,7 @@ package com.example.pilltracker.database;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 /*  Thread safe singleton for managing database access/creation
  */
@@ -10,7 +11,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
     private static DBHandler database;
     private static final String DB_NAME = "pill-tracker-db";
-    private static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 2;
 
     public static DBHandler getInstance(Context context) {
         if(database == null) {
@@ -29,6 +30,8 @@ public class DBHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
+        Log.i("DB", "creating tables");
+
         String create_meds_table = String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY, %s VARCHAR(50) NOT NULL, %s VARCHAR(50), %s VARCHAR(50), %s VARCHAR(50))",
                 Config.MEDS_TABLE,
                 Config.MED_ID,
@@ -48,6 +51,8 @@ public class DBHandler extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+        Log.i("DB", "upgrading");
+
         // drop old tables
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Config.MEDS_TABLE);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Config.MEASURES_TABLE);
